@@ -24,11 +24,11 @@ export default function SettingsMenu() {
                     return (
                         <Link href={item.path} key={item.path} legacyBehavior>
                             <p
-                                className={`mx-[15px] my-[12px] px-4 py-2 rounded-full font-large transition-all duration-300
-                                    flex items-center group
+                                className={`mx-[3px] my-[12px] px-4 py-2 rounded-full font-large transition-all duration-300
+                                    flex items-center group cursor-pointer
                                     ${isActive
-                                        ? "bg-blue-600 text-white hover:bg-blue-700 shadow-sm"
-                                        : "text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+                                        ? "bg-gray-600 text-white hover:bg-gray-700 shadow-sm"
+                                        : "text-gray-600 hover:bg-gray-200 hover:text-gray-600"
                                     }
                                 `}
                             >
