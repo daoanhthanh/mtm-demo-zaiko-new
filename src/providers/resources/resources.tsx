@@ -5,10 +5,10 @@ const Resources: () => ResourceProps[] = () => {
     return [
         {
             name: "blog_posts",
-            list: "/settings",
-            create: "/settings/create",
-            edit: "/settings/edit/:id",
-            show: "/settings/show/:id",
+            list: "/settings/products",
+            create: "/settings/products/create",
+            edit: "/settings/products/edit/:id",
+            show: "/settings/products/show/:id",
             meta: {
                 // label: t("blog_posts.fields.title"),
                 canDelete: true,

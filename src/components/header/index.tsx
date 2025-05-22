@@ -41,7 +41,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
         changeLocale(lang);
         Cookies.set("NEXT_LOCALE", lang);
       },
-      label: lang === "en" ? "English" : "Japanese",
+      label: lang === "en" ? "English" : "日本語",
       icon: (
         <span style={{ marginRight: 8 }}>
           <Avatar size={16} src={`/images/flags/${lang}.svg`} />
@@ -76,7 +76,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           <Space>
             <Avatar size={16} src={`/images/flags/${currentLocale}.svg`} />
             <Typography.Text>
-              {currentLocale === "en" ? "English" : "Japanese"}
+              {currentLocale === "en" ? "English" : "日本語"}
             </Typography.Text>
             <DownOutlined />
           </Space>

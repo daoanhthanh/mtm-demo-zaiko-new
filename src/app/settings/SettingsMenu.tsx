@@ -1,21 +1,22 @@
 "use client";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-// import "./settings-menu.css";
+import {useTranslation} from "@refinedev/core";
 
 const menuItems = [
-    {label: "Products", path: "/settings/products"},
-    {label: "Categories", path: "/settings/categories"},
-    {label: "Warehouse", path: "/settings/warehouse"},
-    {label: "Locations", path: "/settings/locations"},
-    {label: "Customer", path: "/settings/customer"},
-    {label: "Users", path: "/settings/users"},
-    {label: "Permissions", path: "/settings/permissions"},
-    {label: "Department", path: "/settings/department"},
+    {label: "products", path: "/settings/products"},
+    {label: "categories", path: "/settings/categories"},
+    {label: "warehouse", path: "/settings/warehouse"},
+    {label: "locations", path: "/settings/locations"},
+    {label: "customer", path: "/settings/customer"},
+    {label: "users", path: "/settings/users"},
+    {label: "permissions", path: "/settings/permissions"},
+    {label: "department", path: "/settings/department"},
 ];
 
 export default function SettingsMenu() {
     const pathname = usePathname();
+    const {translate: t} = useTranslation();
     return (
             <nav className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-xl shadow-md rounded-full border border-gray-100 inline-flex">
                 <div className="flex flex-row items-center px-[15px]">
@@ -32,7 +33,7 @@ export default function SettingsMenu() {
                                     }
                                 `}
                             >
-                                 {item.label}
+                                 {t(`settings.navbar.${item.label}`)}
                             </p>
                         </Link>
                     );

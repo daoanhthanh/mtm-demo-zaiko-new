@@ -145,7 +145,7 @@
     "titles": {
       "create": "Create Post",
       "edit": "Edit Post",
-      "list": "Posts",
+      "list": "Products",
       "show": "Show Post"
     }
   },
@@ -165,5 +165,17 @@
   },
   "table": {
     "actions": "Actions"
+  },
+  "settings": {
+    "navbar": {
+      "products": "Products",
+      "categories": "Categories",
+      "warehouse": "Warehouse",
+      "locations": "Locations",
+      "customer": "Customer",
+      "users": "Users",
+      "permissions": "Permissions",
+      "department": "Department"
+    }
   }
 }
