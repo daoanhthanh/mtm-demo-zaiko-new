@@ -17,22 +17,26 @@ const menuItems = [
 export default function SettingsMenu() {
   const pathname = usePathname();
   return (
-    <nav className="settings-menu-nav">
-      <ul className="settings-menu-list">
-        {menuItems.map((item) => (
-          <li key={item.path}>
-            <Link href={item.path} legacyBehavior>
-              <a
-                className={
-                  "settings-menu-link" + (pathname === item.path ? " active" : "")
-                }
-              >
-                {item.label}
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="settings-menu-outer-box">
+      <nav className="settings-menu-nav">
+        <ul className="settings-menu-list">
+          {menuItems.map((item) => (
+            <li key={item.path}>
+              <Link href={item.path} legacyBehavior>
+                <a
+                  className={
+                    "settings-menu-link" + (pathname === item.path ? " active" : "")
+                  }
+                >
+                  <span className={pathname === item.path ? "settings-menu-active-box" : undefined}>
+                    {item.label}
+                  </span>
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }
