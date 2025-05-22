@@ -1,3 +1,3 @@
 export default function WarehousePage() {
-  return <h2>Warehouse</h2>;
+  return <h2 className="text-red">Warehouse</h2>;
 }

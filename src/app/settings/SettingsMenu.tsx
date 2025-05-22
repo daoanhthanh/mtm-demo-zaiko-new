@@ -17,14 +17,14 @@ const menuItems = [
 export default function SettingsMenu() {
     const pathname = usePathname();
     return (
-            <nav className="bg-red from-white to-gray-50 backdrop-blur-xl shadow-md rounded-full border border-gray-100 inline-flex">
-                <div className="bg-red-800 flex flex-row items-center px-[15px]">
+            <nav className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-xl shadow-md rounded-full border border-gray-100 inline-flex">
+                <div className="flex flex-row items-center px-[15px]">
                     {menuItems.map((item) => {
                     const isActive = pathname === item.path;
                     return (
                         <Link href={item.path} key={item.path} legacyBehavior>
-                            <a
-                                className={`mx-[15px] my-[12px] text-red rounded-full font-medium transition-all duration-300
+                            <p
+                                className={`mx-[15px] my-[12px] px-4 py-2 rounded-full font-large transition-all duration-300
                                     flex items-center group
                                     ${isActive
                                         ? "bg-blue-600 text-white hover:bg-blue-700 shadow-sm"
@@ -33,7 +33,7 @@ export default function SettingsMenu() {
                                 `}
                             >
                                  {item.label}
-                            </a>
+                            </p>
                         </Link>
                     );
                 })}
