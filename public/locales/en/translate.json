@@ -121,7 +121,7 @@
     "title": "Dashboard"
   },
   "blog_posts": {
-    "blog_posts": "Blog Posts",
+    "blog_posts": "Settings",
     "form": {
       "select": {
         "category": {

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "refine build",
-    "dev": "cross-env NODE_OPTIONS=--max_old_space_size=4096 refine dev",
+    "dev": "cross-env NODE_OPTIONS=--max_old_space_size=4096 refine dev --port 3333",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
     "start": "refine start"
   },
@@ -28,12 +28,12 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^18.16.2",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/parser": "5.48.0",
-    "cross-env": "^7.0.3",
     "eslint": "^8.24.0",
     "typescript": "^5.4.2"
   },

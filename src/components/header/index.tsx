@@ -33,7 +33,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   const { data: user } = useGetIdentity<IUser>();
   const { mode, setMode } = useContext(ColorModeContext);
 
-  const languageMenuItems: MenuProps["items"] = [...(["en", "de"] || [])]
+  const languageMenuItems: MenuProps["items"] = ["jp", "en"]
     .sort()
     .map((lang: string) => ({
       key: lang,
@@ -41,7 +41,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
         changeLocale(lang);
         Cookies.set("NEXT_LOCALE", lang);
       },
-      label: lang === "en" ? "English" : "German",
+      label: lang === "en" ? "English" : "Japanese",
       icon: (
         <span style={{ marginRight: 8 }}>
           <Avatar size={16} src={`/images/flags/${lang}.svg`} />
@@ -76,7 +76,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           <Space>
             <Avatar size={16} src={`/images/flags/${currentLocale}.svg`} />
             <Typography.Text>
-              {currentLocale === "en" ? "English" : "German"}
+              {currentLocale === "en" ? "English" : "Japanese"}
             </Typography.Text>
             <DownOutlined />
           </Space>

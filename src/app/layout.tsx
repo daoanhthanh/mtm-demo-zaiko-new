@@ -4,7 +4,7 @@ import React, { Suspense } from "react";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-import { RefineContext } from "./_refine_context";
+import { AppContext } from "./app-context";
 
 import "@refinedev/antd/dist/reset.css";
 
@@ -33,7 +33,7 @@ export default async function RootLayout({
         <Suspense>
           <AntdRegistry>
             <NextIntlClientProvider locale={locale} messages={messages}>
-              <RefineContext themeMode={theme?.value}>{children}</RefineContext>
+              <AppContext themeMode={theme?.value}>{children}</AppContext>
             </NextIntlClientProvider>
           </AntdRegistry>
         </Suspense>
