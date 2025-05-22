@@ -1,0 +1,17 @@
+.settings-menu-nav {
+  margin-bottom: 24px;
+}
+.settings-menu-list {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+.settings-menu-link {
+  font-weight: normal;
+  text-decoration: none;
+}
+.settings-menu-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
