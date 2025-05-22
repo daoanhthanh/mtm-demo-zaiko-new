@@ -12,7 +12,6 @@ export default async function Layout({ children }: React.PropsWithChildren) {
 
   return (
     <>
-      {/* Settings navigation menu */}
       <SettingsMenu />
       {children}
     </>

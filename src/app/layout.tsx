@@ -6,7 +6,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { AppContext } from "./app-context";
 
-import "@refinedev/antd/dist/reset.css";
+// import "@refinedev/antd/dist/reset.css";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Refine",
