@@ -11,6 +11,11 @@ import {
 } from "@refinedev/antd";
 import { type BaseRecord, useMany, useTranslation } from "@refinedev/core";
 import { Space, Table, Typography } from "antd";
+import Head from "next/head";
+
+// export const metadata = {
+//   title: 'About Us | My Website',
+// };
 
 export default function BlogPostList() {
   const { translate: t } = useTranslation();
@@ -30,6 +35,8 @@ export default function BlogPostList() {
   });
 
   return (
+    <>
+      <Head>About</Head>
       <List>
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title={t("ID")} />
@@ -82,5 +89,6 @@ export default function BlogPostList() {
           />
         </Table>
       </List>
+      </>
   );
 }

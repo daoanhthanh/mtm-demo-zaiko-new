@@ -1,28 +1,53 @@
-import React from "react";
-import {
-  pickNotDeprecated,
-  useActiveAuthProvider,
-  useGetIdentity,
-} from "@refinedev/core";
-import { Layout as AntdLayout, Typography, Avatar, Space, theme } from "antd";
-import type { RefineThemedLayoutV2HeaderProps } from "@refinedev/antd";
+"use client";
 
-export const ThemedHeaderV2: React.FC<RefineThemedLayoutV2HeaderProps> = ({
-  isSticky,
+import { DownOutlined } from "@ant-design/icons";
+import { ColorModeContext } from "@contexts/color-mode";
+import type { RefineThemedLayoutV2HeaderProps } from "@refinedev/antd";
+import { useGetIdentity, useTranslation } from "@refinedev/core";
+import {
+  Layout as AntdLayout,
+  Avatar,
+  Button,
+  Dropdown,
+  type MenuProps,
+  Space,
+  Switch,
+  Typography,
+  theme,
+} from "antd";
+import React, { useContext } from "react";
+import Cookies from "js-cookie";
+
+type IUser = {
+  id: number;
+  name: string;
+  avatar: string;
+};
+
+export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   sticky,
 }) => {
+  const { getLocale, changeLocale } = useTranslation();
+  const currentLocale = getLocale();
   const { token } = theme.useToken();
+  const { data: user } = useGetIdentity<IUser>();
+  const { mode, setMode } = useContext(ColorModeContext);
 
-  const authProvider = useActiveAuthProvider();
-  const { data: user } = useGetIdentity({
-    v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
-  });
-
-  const shouldRenderHeader = user && (user.name || user.avatar);
-
-  if (!shouldRenderHeader) {
-    return null;
-  }
+  const languageMenuItems: MenuProps["items"] = ["jp", "en"]
+    .sort()
+    .map((lang: string) => ({
+      key: lang,
+      onClick: () => {
+        changeLocale(lang);
+        Cookies.set("NEXT_LOCALE", lang);
+      },
+      label: lang === "en" ? "English" : "日本語",
+      icon: (
+        <span style={{ marginRight: 8 }}>
+          <Avatar size={16} src={`/images/flags/${lang}.svg`} />
+        </span>
+      ),
+    }));
 
   const headerStyles: React.CSSProperties = {
     backgroundColor: token.colorBgElevated,
@@ -33,7 +58,7 @@ export const ThemedHeaderV2: React.FC<RefineThemedLayoutV2HeaderProps> = ({
     height: "64px",
   };
 
-  if (pickNotDeprecated(sticky, isSticky)) {
+  if (sticky) {
     headerStyles.position = "sticky";
     headerStyles.top = 0;
     headerStyles.zIndex = 1;
@@ -41,11 +66,37 @@ export const ThemedHeaderV2: React.FC<RefineThemedLayoutV2HeaderProps> = ({
 
   return (
     <AntdLayout.Header style={headerStyles}>
+      <Dropdown
+        menu={{
+          items: languageMenuItems,
+          selectedKeys: currentLocale ? [currentLocale] : [],
+        }}
+      >
+        <Button type="text">
+          <Space>
+            <Avatar size={16} src={`/images/flags/${currentLocale}.svg`} />
+            <Typography.Text>
+              {currentLocale === "en" ? "English" : "日本語"}
+            </Typography.Text>
+            <DownOutlined />
+          </Space>
+        </Button>
+      </Dropdown>
       <Space>
-        <Space size="middle">
-          {user?.name && <Typography.Text strong>{user.name}</Typography.Text>}
-          {user?.avatar && <Avatar src={user?.avatar} alt={user?.name} />}
-        </Space>
+        <Switch
+          checkedChildren="🌛"
+          unCheckedChildren="🔆"
+          onChange={() => setMode(mode === "light" ? "dark" : "light")}
+          defaultChecked={mode === "dark"}
+        />
+        {(user?.name || user?.avatar) && (
+          <Space style={{ marginLeft: "8px" }} size="middle">
+            {user?.name && (
+              <Typography.Text strong>{user.name}</Typography.Text>
+            )}
+            {user?.avatar && <Avatar src={user?.avatar} alt={user?.name} />}
+          </Space>
+        )}
       </Space>
     </AntdLayout.Header>
   );

@@ -11,7 +11,7 @@ import {dataProvider} from "@providers/data-provider";
 import {authProviderClient} from "@providers/auth-provider/auth-provider.client";
 import {useLocale, useTranslations} from "next-intl";
 import {setUserLocale} from "@i18n";
-import {Header} from "@components/header";
+import {Header} from "@components/layout/header";
 import {usePathname} from "next/navigation";
 import {ThemedSiderV2} from "@components/layout/sider";
 import {ThemedTitleV2} from "@components/layout/title";
@@ -59,9 +59,9 @@ export const AppContext = ({
                             {isLoginPage ? (
                                 children
                             ) : (
-                                <ThemedLayoutV2 
-                                    Header={Header} 
-                                    Sider={ThemedSiderV2} 
+                                <ThemedLayoutV2
+                                    Header={Header}
+                                    Sider={ThemedSiderV2}
                                     Title={ThemedTitleV2}
                                 >
                                     {children}
