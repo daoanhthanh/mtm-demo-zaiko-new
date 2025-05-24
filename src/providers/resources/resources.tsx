@@ -1,7 +1,6 @@
 import {ResourceProps, useTranslation} from "@refinedev/core";
 
 const Resources: () => ResourceProps[] = () => {
-    const { translate: t } = useTranslation();
     return [
         {
             name: "blog_posts",
