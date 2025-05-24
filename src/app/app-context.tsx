@@ -16,6 +16,7 @@ import {usePathname} from "next/navigation";
 import {ThemedSiderV2} from "@components/layout/sider";
 import {ThemedTitleV2} from "@components/layout/title";
 import Resources from "@providers/resources/resources";
+import {ThemedLayout} from "@components/themed-layout";
 
 
 type Props = {
@@ -59,13 +60,9 @@ export const AppContext = ({
                             {isLoginPage ? (
                                 children
                             ) : (
-                                <ThemedLayoutV2
-                                    Header={Header}
-                                    Sider={ThemedSiderV2}
-                                    Title={ThemedTitleV2}
-                                >
+                                <ThemedLayout>
                                     {children}
-                                </ThemedLayoutV2>
+                                </ThemedLayout>
                             )}
                             <RefineKbar/>
                         </Refine>

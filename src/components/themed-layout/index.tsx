@@ -1,11 +1,17 @@
 "use client";
 
-import { Header } from "@components/header";
-import { ThemedLayoutV2 } from "@refinedev/antd";
+import {Header, ThemedSiderV2, ThemedTitleV2} from "@components/layout";
+import {ThemedLayoutV2} from "@refinedev/antd";
 import React from "react";
 
-export const ThemedLayout = ({ children }: React.PropsWithChildren) => {
-  return (
-    <ThemedLayoutV2 Header={() => <Header sticky />}>{children}</ThemedLayoutV2>
-  );
+export const ThemedLayout = ({children}: React.PropsWithChildren) => {
+    return (
+        <ThemedLayoutV2
+            Header={() => <Header sticky/>}
+            Sider={ThemedSiderV2}
+            Title={ThemedTitleV2}
+        >
+            {children}
+        </ThemedLayoutV2>
+    );
 };
