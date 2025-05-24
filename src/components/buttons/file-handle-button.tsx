@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from "react";
 
-import { CloudDownloadOutlined, CloudUploadOutlined } from "@ant-design/icons";
+import { ExportOutlined, ImportOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { Button, Modal, Upload } from "antd";
 
@@ -44,7 +44,7 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
   };
 
   const icon =
-    type === "Export" ? <CloudDownloadOutlined /> : <CloudUploadOutlined />;
+    type === "Export" ? <ExportOutlined /> : <ImportOutlined />;
 
   const importProps: UploadProps = {
     name: "file",
@@ -83,7 +83,7 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
 
   const ImportButton = () => {
     return (
-      <Button icon={icon} size={"large"}>
+      <Button icon={icon} size={"middle"}>
         {label ?? "Nhấn để nhập file"}
       </Button>
     );
@@ -92,7 +92,7 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
   const ExportButton = () => {
     return (
       <>
-        <Button type="primary" size={"large"} icon={icon} onClick={showModal}>
+        <Button type="primary" size={"middle"} icon={icon} onClick={showModal}>
           {label ?? "Nhấn để nhập file"}
         </Button>
         <Modal
