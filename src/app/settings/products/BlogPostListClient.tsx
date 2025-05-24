@@ -1,5 +1,6 @@
 "use client";
 
+import {FileHandleButton} from "@components/buttons";
 import {
   DateField,
   DeleteButton,
@@ -7,9 +8,10 @@ import {
   List,
   MarkdownField,
   ShowButton,
+  CreateButton
 } from "@refinedev/antd";
 import { type BaseRecord, useTranslation } from "@refinedev/core";
-import { Space, Table, Typography } from "antd";
+import { Button, Space, Table, Typography } from "antd";
 import Head from "next/head";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -88,9 +90,30 @@ export default function BlogPostListClient({
   return (
     <>
       <Head>
-        <title>Blog Posts | Products</title>
+        <title>Settings | Products</title>
       </Head>
-      <List>
+      <List headerButtons={() => {
+          return (
+            <Space>
+              <FileHandleButton
+                type={"Export"}
+                entity={"nhân viên"}
+                onSubmit={() => console.log("submitted")}
+                label={"Xuất danh sách"}
+              />
+
+              <FileHandleButton
+                type="Import"
+                entity="nhân viên"
+                accept=".xlsx"
+                onSubmit={() => console.log("submitted")}
+                label="Nhập danh sách"
+                mockedFile="mau_file_nhan_vien.xlsx"
+              />
+              <CreateButton/>
+            </Space>
+          );
+        }}>
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title={t("ID")} />
           <Table.Column dataIndex="title" title={t("blog_posts.fields.title")} />
