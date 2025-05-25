@@ -5,6 +5,7 @@ import { Form, Input, Select, DatePicker, Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "@refinedev/core";
 import { SearchOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
 
 const { RangePicker } = DatePicker;
 
@@ -35,9 +36,23 @@ const FilterSection = ({ categories }: { categories: { id: string; title: string
             ?.split(",")
             .map((status) => statusMap[parseInt(status, 10)])
         : undefined,
-      createdAt: searchParams.get("createdAt")
-        ? searchParams.get("createdAt")?.split(",").map((date) => new Date(date))
-        : undefined,
+      createdAt: (() => {
+        const fromDate = (() => {
+          const from = searchParams.get("from");
+          if (!from) return null;
+          const parsedDate = dayjs(from, "YYYYMMDD");
+          return parsedDate.isValid() ? parsedDate : null;
+        })();
+
+        const toDate = (() => {
+          const to = searchParams.get("to");
+          if (!to) return null;
+          const parsedDate = dayjs(to, "YYYYMMDD");
+          return parsedDate.isValid() ? parsedDate : null;
+        })();
+
+        return fromDate && toDate ? [fromDate.toDate(), toDate.toDate()] : undefined;
+      })(),
     };
     form.setFieldsValue(initialValues);
   }, [searchParams, form]);
@@ -116,7 +131,7 @@ const FilterSection = ({ categories }: { categories: { id: string; title: string
             router.push("?");
           }}
         >
-          Clear
+          {t("buttons.clear")}
         </Button>
         <Button
           type="primary"

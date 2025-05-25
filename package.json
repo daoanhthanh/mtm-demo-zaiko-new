@@ -21,6 +21,7 @@
     "@tailwindcss/postcss": "^4.1.7",
     "antd": "^5.17.0",
     "cross-env": "^7.0.3",
+    "dayjs": "^1.11.13",
     "js-cookie": "^3.0.1",
     "next": "^14.2.26",
     "next-compose-plugins": "^2.2.1",
