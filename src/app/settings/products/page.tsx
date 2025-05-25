@@ -73,7 +73,7 @@ export default async function BlogPostList({
   } catch (error) {
     console.error("Error fetching data:", error);
 
-    // Return client component with empty data on error
+    // Return a client component with empty data on error
     return (
       <BlogPostListClient
         blogPosts={[]}

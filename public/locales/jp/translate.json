@@ -188,5 +188,8 @@
     "downloadTemplate": "テンプレートファイルをダウンロード",
     "importLimit": "システムはファイルごとに最大2,000の{entity}をインポートできます。",
     "imageInstructions": "画像関連のフィールドについては、システムまたはクラウド（Google Drive、One Driveなど）にアップロードし、画像リンクを貼り付けてください。インポートプロセス中にこれらの画像が公開アクセス可能であることを確認してください。"
+  },
+  "pagination": {
+    "showTotal": "{rangeStart}ー{rangeEnd}件 / 全{total}件"
   }
 }

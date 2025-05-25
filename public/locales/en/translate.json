@@ -188,5 +188,8 @@
     "downloadTemplate": "Download template file",
     "importLimit": "The system allows importing up to 2,000 {entity} per file.",
     "imageInstructions": "For image-related fields, upload them to the system or cloud (Google Drive, One Drive, etc.) and paste the image link. Ensure these images are publicly accessible during the import process."
+  },
+  "pagination": {
+    "showTotal": "{rangeStart} - {rangeEnd} of {total} items"
   }
 }

@@ -11,7 +11,7 @@ import {
   CreateButton
 } from "@refinedev/antd";
 import { type BaseRecord, useTranslation } from "@refinedev/core";
-import { Button, Space, Table, Typography } from "antd";
+import { Space, Table, Typography } from "antd";
 import Head from "next/head";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -51,7 +51,7 @@ export default function BlogPostListClient({
   const currentPage = parseInt(searchParams.get("current") || "1");
   const pageSize = parseInt(searchParams.get("pageSize") || "10");
 
-  // Create a map for quick category lookup
+  // Create a map for a quick category lookup
   const categoryMap = categories.reduce((acc, category) => {
     acc[category.id] = category.title;
     return acc;
@@ -71,7 +71,6 @@ export default function BlogPostListClient({
     router.push(`?${params.toString()}`);
   }, [router, searchParams]);
 
-  // Transform data for Ant Design Table
   const tableProps = {
     dataSource: blogPosts,
     pagination: {
@@ -82,7 +81,11 @@ export default function BlogPostListClient({
       pageSizeOptions: ["10", "20", "50"],
       showQuickJumper: true,
       showTotal: (total: number, range: [number, number]) =>
-        `${range[0]}-${range[1]} of ${total} items`,
+        t("pagination.showTotal", {
+          rangeStart: range[0],
+          rangeEnd: range[1],
+          total,
+        }),
     },
     onChange: handleTableChange,
   };
