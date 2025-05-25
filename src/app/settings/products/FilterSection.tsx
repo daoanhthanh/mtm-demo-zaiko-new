@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Select, DatePicker, Button } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslation } from "@refinedev/core";
+import { SearchOutlined } from "@ant-design/icons";
 
 const { RangePicker } = DatePicker;
 
@@ -15,11 +17,18 @@ const FilterSection = ({ categories }: { categories: { id: string; title: string
   const router = useRouter();
   const searchParams = useSearchParams();
   const [form] = Form.useForm();
+  const { translate: t } = useTranslation();
+
 
   useEffect(() => {
     const initialValues = {
       content: searchParams.get("content") || "",
-      category: searchParams.get("category") || undefined,
+      category: searchParams.get("category")
+        ? searchParams
+            .get("category")
+            ?.split(",")
+            .map((category) => parseInt(category, 10))
+        : undefined,
       status: searchParams.get("status")
         ? searchParams
             .get("status")
@@ -45,10 +54,9 @@ const FilterSection = ({ categories }: { categories: { id: string; title: string
       );
     }
     if (values.createdAt) {
-      params.set(
-        "createdAt",
-        values.createdAt.map((date: Date) => date.toISOString()).join(",")
-      );
+      const [from, to] = values.createdAt;
+      if (from) params.set("from", from.toISOString().split("T")[0].replace(/-/g, ""));
+      if (to) params.set("to", to.toISOString().split("T")[0].replace(/-/g, ""));
     }
 
     router.push(`?${params.toString()}`);
@@ -57,45 +65,67 @@ const FilterSection = ({ categories }: { categories: { id: string; title: string
   return (
     <Form
       form={form}
-      layout="inline"
-      className=" mb-5"
+      layout="horizontal"
+      style={{
+        padding: "15px",
+        marginBottom: "9px"
+      }}
+      className="rounded-2xl border-2 border-[var(--ant-color-primary)]"
       onFinish={handleFinish}
     >
-      <Form.Item label="Content" name="content">
-        <Input placeholder="Search by content" className="w-50px" />
-      </Form.Item>
-      <Form.Item label="Category" name="category">
-        <Select
-          placeholder="Select category"
-          className="min-w-[12rem]"
-          mode="multiple"
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <Form.Item label={t("blog_posts.fields.content")} name="content">
+          <Input className="w-30px" />
+        </Form.Item>
+        <Form.Item label={t("blog_posts.fields.category")} name="category">
+          <Select
+            placeholder="Select category"
+            className="min-w-[12rem]"
+            mode="multiple"
+          >
+            {categories.map((category) => (
+              <Select.Option key={category.id} value={category.id}>
+                {category.title}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item label={t("blog_posts.fields.status.title")} name="status">
+          <Select
+            placeholder="Select status"
+            className="min-w-[10rem]"
+            mode="multiple"
+          >
+            {Object.entries(statusMap).map(([key, value]) => (
+              <Select.Option key={key} value={value}>
+                {value}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item label={t("blog_posts.fields.createdAt")} name="createdAt">
+          <RangePicker className="w-80px" />
+        </Form.Item>
+      </div>
+      <div className="flex justify-end items-center gap-4">
+        <Button
+          type="default"
+          className="w-fit-content"
+          onClick={() => {
+            form.resetFields();
+            router.push("?");
+          }}
         >
-          {categories.map((category) => (
-            <Select.Option key={category.id} value={category.id}>
-              {category.title}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item label="Status" name="status">
-        <Select
-          placeholder="Select status"
-          className="min-w-[10rem]"
-          mode="multiple"
+          Clear
+        </Button>
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="w-fit-content"
         >
-          {Object.entries(statusMap).map(([key, value]) => (
-            <Select.Option key={key} value={value}>
-              {value}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item label="Created At" name="createdAt">
-        <RangePicker className="w-80px" />
-      </Form.Item>
-      <Button type="primary" htmlType="submit" className="w-fit-content">
-        Apply Filters
-      </Button>
+          <SearchOutlined />
+        </Button>
+      </div>
     </Form>
   );
 };
