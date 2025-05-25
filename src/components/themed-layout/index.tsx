@@ -9,8 +9,9 @@ export const ThemedLayout = ({children}: React.PropsWithChildren) => {
         <ThemedLayoutV2
             Header={() => <Header sticky/>}
             Sider={ThemedSiderV2}
-            Title={({collapsed}) => <ThemedTitleV2 collapsed={collapsed} isHeader/>}
-        >
+            Title={({collapsed}) =>
+                <ThemedTitleV2 collapsed={collapsed} isHeader/>
+            }>
             {children}
         </ThemedLayoutV2>
     );
