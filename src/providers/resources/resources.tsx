@@ -1,4 +1,5 @@
 import {ResourceProps, useTranslation} from "@refinedev/core";
+import {SettingOutlined} from "@ant-design/icons";
 
 const Resources: () => ResourceProps[] = () => {
     return [
@@ -11,6 +12,7 @@ const Resources: () => ResourceProps[] = () => {
             meta: {
                 // label: t("blog_posts.fields.title"),
                 canDelete: true,
+                icon: <SettingOutlined />
             },
         },
         {

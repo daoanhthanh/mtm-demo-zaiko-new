@@ -98,7 +98,9 @@
     "undo": "Undo",
     "import": "Import",
     "clone": "Clone",
-    "notAccessTitle": "You don't have permission to access"
+    "notAccessTitle": "You don't have permission to access",
+    "importFile": "Import file",
+    "exportFile": "Export file"
   },
   "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
   "notifications": {
@@ -111,7 +113,10 @@
     "deleteError": "Error when deleting {resource} (status code: {statusCode})",
     "editSuccess": "Successfully edited {resource}",
     "editError": "Error when editing {resource} (status code: {statusCode})",
-    "importProgress": "Importing: {processed}/{total}"
+    "importProgress": "Importing: {processed}/{total}",
+    "uploadSuccess": "File uploaded successfully {fileName}!",
+    "uploadError": "Upload failed: {fileName}!",
+    "failure": "Failure"
   },
   "loading": "Loading",
   "tags": {
@@ -177,5 +182,11 @@
       "permissions": "Permissions",
       "department": "Department"
     }
+  },
+  "modals": {
+    "importTitle": "Import {entity} list from data file",
+    "downloadTemplate": "Download template file",
+    "importLimit": "The system allows importing up to 2,000 {entity} per file.",
+    "imageInstructions": "For image-related fields, upload them to the system or cloud (Google Drive, One Drive, etc.) and paste the image link. Ensure these images are publicly accessible during the import process."
   }
 }

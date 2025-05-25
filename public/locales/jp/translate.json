@@ -98,7 +98,9 @@
     "undo": "元に戻す",
     "import": "インポート",
     "clone": "クローン",
-    "notAccessTitle": "アクセス権限がありません"
+    "notAccessTitle": "アクセス権限がありません",
+    "importFile": "品番取込",
+    "exportFile": "品番エクスポート"
   },
   "warnWhenUnsavedChanges": "保存されていない変更があります。本当に離れますか？",
   "notifications": {
@@ -111,7 +113,10 @@
     "deleteError": "{resource}の削除中にエラーが発生しました (ステータスコード: {statusCode})",
     "editSuccess": "{resource}を正常に編集しました",
     "editError": "{resource}の編集中にエラーが発生しました (ステータスコード: {statusCode})",
-    "importProgress": "インポート中: {processed}/{total}"
+    "importProgress": "インポート中: {processed}/{total}",
+    "uploadSuccess": "ファイルが正常にアップロードされました {fileName}!",
+    "uploadError": "アップロードに失敗しました: {fileName}!",
+    "failure": "失敗"
   },
   "loading": "読み込み中",
   "tags": {
@@ -177,5 +182,11 @@
       "permissions": "権限",
       "department": "部門"
     }
+  },
+  "modals": {
+    "importTitle": "データファイルから{entity}リストをインポート",
+    "downloadTemplate": "テンプレートファイルをダウンロード",
+    "importLimit": "システムはファイルごとに最大2,000の{entity}をインポートできます。",
+    "imageInstructions": "画像関連のフィールドについては、システムまたはクラウド（Google Drive、One Driveなど）にアップロードし、画像リンクを貼り付けてください。インポートプロセス中にこれらの画像が公開アクセス可能であることを確認してください。"
   }
 }

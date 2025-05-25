@@ -1,9 +1,9 @@
 import { dataProviderServer } from "@providers/data-provider/server";
 import BlogPostListClient from "./BlogPostListClient";
 
-export const metadata = {
-  title: 'Blog Posts | Products',
-};
+// export const metadata = {
+//   title: 'Blog Posts | Products',
+// };
 
 interface BlogPost {
   id: string;

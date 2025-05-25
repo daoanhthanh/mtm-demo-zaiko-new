@@ -90,7 +90,7 @@ export default function BlogPostListClient({
   return (
     <>
       <Head>
-        <title>Settings | Products</title>
+        <title>{t("blog_posts.titles.list")}</title>
       </Head>
       <List headerButtons={() => {
           return (
@@ -99,7 +99,7 @@ export default function BlogPostListClient({
                 type={"Export"}
                 entity={"nhân viên"}
                 onSubmit={() => console.log("submitted")}
-                label={"Xuất danh sách"}
+                // label={"Xuất danh sách"}
               />
 
               <FileHandleButton
@@ -107,7 +107,7 @@ export default function BlogPostListClient({
                 entity="nhân viên"
                 accept=".xlsx"
                 onSubmit={() => console.log("submitted")}
-                label="Nhập danh sách"
+                // label="Nhập danh sách"
                 mockedFile="mau_file_nhan_vien.xlsx"
               />
               <CreateButton/>

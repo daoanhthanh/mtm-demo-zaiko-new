@@ -1,25 +1,29 @@
 import React from "react";
-import {useLink, useRefineOptions, useRouterContext, useRouterType,} from "@refinedev/core";
+import {useLink, useRouterContext, useRouterType,} from "@refinedev/core";
 import {Space, theme, Typography} from "antd";
 import type {RefineLayoutThemedTitleProps} from "@refinedev/antd";
-// import AppIcon from '@icons/icon.svg';
-import AppIcon from '@icons/icon.svg';
 
 
-export const ThemedTitleV2: React.FC<RefineLayoutThemedTitleProps> = ({
-                                                                          collapsed,
-                                                                          icon: iconFromProps,
-                                                                          text: textFromProps,
-                                                                          wrapperStyles,
-                                                                      }) => {
-    const {title: {icon: defaultIcon, text: defaultText} = {}} =
-        useRefineOptions();
+export const ThemedTitleV2: React.FC<
+    RefineLayoutThemedTitleProps
+    & { isHeader?: boolean }
+> = ({
+         collapsed,
+         isHeader,
+         text: textFromProps,
+         wrapperStyles,
+     }) => {
 
-    const icon =
-        typeof iconFromProps === "undefined" ? defaultIcon : iconFromProps;
+    const Icon = () => {
+        return <img src="/favicon.ico" alt="icon"/>;
+    }
 
-    const text =
-        typeof textFromProps === "undefined" ? process.env.NEXT_PUBLIC_COMPANY_NAME : textFromProps;
+    const text = typeof textFromProps === "undefined" ? process.env.NEXT_PUBLIC_COMPANY_NAME : textFromProps as string;
+
+    const Logo = () => {
+        return <img src="/logo.png" alt="logo"/>;
+    }
+
     const {token} = theme.useToken();
     const routerType = useRouterType();
     const Link = useLink();
@@ -43,28 +47,33 @@ export const ThemedTitleV2: React.FC<RefineLayoutThemedTitleProps> = ({
                     ...wrapperStyles,
                 }}
             >
-                <div
-                    style={{
-                        height: "24px",
-                        width: "24px",
-                        color: token.colorPrimary,
-                    }}
-                >
-                    {icon}
-                </div>
-
-                {!collapsed && (
-                    <Typography.Title
+                {isHeader ? (<>
+                    <div
                         style={{
-                            fontSize: "inherit",
-                            marginBottom: 0,
-                            fontWeight: 700,
+                            height: "24px",
+                            width: "24px",
+                            color: token.colorPrimary,
                         }}
                     >
-                        {text}
-                    </Typography.Title>
-                )}
+                        <Icon/>
+                    </div>
+
+                    {!collapsed && (
+                        <Typography.Title
+                            style={{
+                                fontSize: "inherit",
+                                marginBottom: 0,
+                                fontWeight: 700,
+                            }}
+                        >
+                            {text}
+                        </Typography.Title>
+                    )}
+                </>) : (<Logo/>)}
             </Space>
         </ActiveLink>
     );
 };
+
+
+

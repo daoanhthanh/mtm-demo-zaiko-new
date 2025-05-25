@@ -7,7 +7,7 @@ import { Button, Modal, Upload } from "antd";
 import Index from "@/components/warning-content";
 
 import styles from "./buttons.module.css";
-import { useNotification } from "@refinedev/core";
+import { useNotification, useTranslate } from "@refinedev/core";
 // import { get } from "@/providers/http/request";
 // import { endpoints } from "@/providers/endpoints";
 
@@ -34,6 +34,7 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
   const [openFileModal, setOpenFileModal] = useState(false);
 
   const { open } = useNotification();
+  const t = useTranslate();
 
   const showModal = () => {
     setOpenFileModal(true);
@@ -60,14 +61,14 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
       if (info.file.status === "done") {
         open?.({
           type: "success",
-          message: `File đã được tải lên thành công ${info.file.name}!`,
-          description: "Thành công",
+          message: t("notifications.uploadSuccess", { fileName: info.file.name }),
+          description: t("notifications.success"),
         });
       } else if (info.file.status === "error") {
         open?.({
           type: "error",
-          message: `Quá trình tải lên bị lỗi: ${info.file.name}!`,
-          description: "Thất bại",
+          message: t("notifications.uploadError", { fileName: info.file.name }),
+          description: t("notifications.failure"),
         });
       }
     },
@@ -84,7 +85,7 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
   const ImportButton = () => {
     return (
       <Button icon={icon} size={"middle"}>
-        {label ?? "Nhấn để nhập file"}
+        {label ?? t("buttons.importFile")}
       </Button>
     );
   };
@@ -93,14 +94,14 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
     return (
       <>
         <Button type="primary" size={"middle"} icon={icon} onClick={showModal}>
-          {label ?? "Nhấn để nhập file"}
+          {label ?? t("buttons.exportFile")}
         </Button>
         <Modal
           title={
             <>
-              <h3>Nhập danh sách {entity} từ file dữ liệu</h3>
+              <h3>{t("modals.importTitle", { entity })}</h3>
               <a className={styles.downloadTemplate} onClick={downloadTemplate}>
-                Tải về file mẫu
+                {t("modals.downloadTemplate")}
               </a>
             </>
           }
@@ -124,16 +125,8 @@ export const FileHandleButton: FC<FileHandleButtonProps> = ({
           <Index
             content={
               <>
-                <p>
-                  Hệ thống cho phép nhập tối đa 2.000 {entity} mỗi lần từ file .
-                </p>
-                <p>
-                  Với các trường liên quan đến hình ảnh, hãy tải chúng lên hệ
-                  thống hoặc đám mây (Google Drive, One Drive ...) rồi lấy link
-                  hình ảnh dán vào. Hãy đảm bảo những bức ảnh đó được{" "}
-                  <strong>cấp quyền truy cập công khai</strong> trong quá trình
-                  nhập dữ liệu.
-                </p>
+                <p>{t("modals.importLimit", { entity })}</p>
+                <p>{t("modals.imageInstructions")}</p>
               </>
             }
           />

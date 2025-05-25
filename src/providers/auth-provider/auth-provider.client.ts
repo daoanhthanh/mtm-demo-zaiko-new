@@ -11,10 +11,10 @@ const mockUsers = [
     roles: ["admin"],
   },
   {
-    email: "editor@refine.dev",
-    name: "Jane Doe",
+    email: "admin@eeeCloud.jp",
+    name: "Admin User",
     avatar: "https://i.pravatar.cc/150?img=1",
-    roles: ["editor"],
+    roles: ["admin"],
   },
   {
     email: "demo@refine.dev",
