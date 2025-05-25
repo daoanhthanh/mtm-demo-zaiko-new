@@ -14,7 +14,7 @@ import { type BaseRecord, useTranslation } from "@refinedev/core";
 import { Space, Table, Typography } from "antd";
 import Head from "next/head";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import FilterSection from "./FilterSection";
 
 interface BlogPost {
@@ -47,6 +47,7 @@ export default function BlogPostListClient({
   const { translate: t } = useTranslation();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
 
   // Get current pagination from URL
   const currentPage = parseInt(searchParams.get("current") || "1");
@@ -71,6 +72,20 @@ export default function BlogPostListClient({
 
     router.push(`?${params.toString()}`);
   }, [router, searchParams]);
+
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedRowKeys(blogPosts.map((post) => post.id));
+    } else {
+      setSelectedRowKeys([]);
+    }
+  };
+
+  const handleSelectRow = (id: string, checked: boolean) => {
+    setSelectedRowKeys((prev) =>
+      checked ? [...prev, id] : prev.filter((key) => key !== id)
+    );
+  };
 
   const tableProps = {
     dataSource: blogPosts,
@@ -118,6 +133,24 @@ export default function BlogPostListClient({
         }}>
           <FilterSection categories={categories} />
         <Table {...tableProps} rowKey="id">
+          <Table.Column
+            title={
+              <input
+                type="checkbox"
+                aria-label="Select all"
+                checked={selectedRowKeys.length === blogPosts.length}
+                onChange={(e) => handleSelectAll(e.target.checked)}
+              />
+            }
+            render={(_, record: BlogPost) => (
+              <input
+                type="checkbox"
+                aria-label={`Select row ${record.id}`}
+                checked={selectedRowKeys.includes(record.id)}
+                onChange={(e) => handleSelectRow(record.id, e.target.checked)}
+              />
+            )}
+          />
           <Table.Column dataIndex="id" title={t("ID")} />
           <Table.Column dataIndex="title" title={t("blog_posts.fields.title")} />
           <Table.Column
