@@ -15,6 +15,7 @@ import { Space, Table, Typography } from "antd";
 import Head from "next/head";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import FilterSection from "./FilterSection";
 
 interface BlogPost {
   id: string;
@@ -102,7 +103,6 @@ export default function BlogPostListClient({
                 type={"Export"}
                 entity={"nhân viên"}
                 onSubmit={() => console.log("submitted")}
-                // label={"Xuất danh sách"}
               />
 
               <FileHandleButton
@@ -110,13 +110,13 @@ export default function BlogPostListClient({
                 entity="nhân viên"
                 accept=".xlsx"
                 onSubmit={() => console.log("submitted")}
-                // label="Nhập danh sách"
                 mockedFile="mau_file_nhan_vien.xlsx"
               />
               <CreateButton/>
             </Space>
           );
         }}>
+          <FilterSection categories={categories} />
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title={t("ID")} />
           <Table.Column dataIndex="title" title={t("blog_posts.fields.title")} />
